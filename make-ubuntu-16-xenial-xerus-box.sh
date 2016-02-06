@@ -37,10 +37,8 @@ sed /etc/ssh/sshd_config -i \
     -e 's/\#AuthorizedKeysFile/AuthorizedKeysFile/g' \
     -e 's/\PubKeyAuthentication no/PubKeyAuthentication yes/g' \
     -e 's/\#PubKeyAuthentication/PubKeyAuthentication/g' \
-    -e 's/\#PermitEmptyPasswords/PermitEmptyPasswords/g' \
-    -e 's/\#PermitEmptyPasswords yes/PermitEmptyPasswords no/g' 
-    -e 's/\#PermitEmptyPasswords/PermitEmptyPasswords/g' \
-    -e 's/\#PermitEmptyPasswords yes/PermitEmptyPasswords no/g' 
+    -e 's/\PermitEmptyPasswords yes/PermitEmptyPasswords no/g' \
+    -e 's/\#PermitEmptyPasswords/PermitEmptyPasswords/g' 
 
 echo "UseDNS no" >> /etc/sshd_config
 
@@ -50,7 +48,7 @@ service ssh restart
 # install build essentials
 apt-get install -y build-essential linux-headers-generic linux-headers-`uname -r`
 
-# install vbox guest additions
+# install/build vbox guest additions
 cd /tmp
 VBOX_VERSION=5.0.14
 wget http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso
