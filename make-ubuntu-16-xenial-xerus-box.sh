@@ -72,6 +72,9 @@ sed -i /etc/default/grub \
   -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\"/GRUB_CMDLINE_LINUX_DEFAULT=\"net.ifnames=0 quiet\"/g"
 update-grub
 
+# update network interfaces
+sed /etc/network/interfaces -i -e 's/\enp0s3/eth0/g'
+
 # whiteout
 dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY
@@ -80,10 +83,3 @@ rm -f /EMPTY
 cat /dev/null > /home/vagrant/.bash_history
 cat /dev/null > /root/.bash_history
 history -c
-
-
-
-
-
-
-
