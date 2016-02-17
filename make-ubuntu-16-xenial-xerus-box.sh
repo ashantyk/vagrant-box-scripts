@@ -61,7 +61,7 @@ rm VBoxGuestAdditions_$VBOX_VERSION.iso
 apt-get purge git git-man -y -f
 apt-get purge build-essential linux-headers* software-properties-common libx11* gcc cpp gcc-5 cpp-5 -y -f
 apt-get purge wireless* memtest86+ laptop-detect -y -f
-apt-get autoremove
+apt-get autoremove -y -f
 
 # ensure rsync
 apt-get install rsync
@@ -69,7 +69,7 @@ apt-get install rsync
 # update bootloader (grub)
 sed -i /etc/default/grub \
   -e "s/GRUB_TIMEOUT=[0-9]\+/GRUB_TIMEOUT=1/g" \
-  -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet\"/g"
+  -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\"/GRUB_CMDLINE_LINUX_DEFAULT=\"net.ifnames=0 quiet\"/g"
 update-grub
 
 # whiteout
