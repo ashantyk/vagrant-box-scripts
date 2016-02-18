@@ -35,9 +35,9 @@ apt-get install openssh-server -y
 # config ssh server 
 sed /etc/ssh/sshd_config -i \
     -e 's/\#AuthorizedKeysFile/AuthorizedKeysFile/g' \
-    -e 's/\PubKeyAuthentication no/PubKeyAuthentication yes/g' \
+    -e 's/PubKeyAuthentication no/PubKeyAuthentication yes/g' \
     -e 's/\#PubKeyAuthentication/PubKeyAuthentication/g' \
-    -e 's/\PermitEmptyPasswords yes/PermitEmptyPasswords no/g' \
+    -e 's/PermitEmptyPasswords yes/PermitEmptyPasswords no/g' \
     -e 's/\#PermitEmptyPasswords/PermitEmptyPasswords/g' 
 
 echo "UseDNS no" >> /etc/sshd_config
@@ -53,7 +53,7 @@ cd /tmp
 VBOX_VERSION=5.0.14
 wget http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso
 mount -o loop,ro VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
-/mnt/VBoxLinuxAdditions.run -nox11
+/mnt/VBoxLinuxAdditions.run --nox11
 
 # cleanup
 umount /mnt
