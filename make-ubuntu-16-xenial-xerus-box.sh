@@ -19,18 +19,15 @@ fi
 # update / fix locale
 echo 'LC_ALL="en_US.utf8"' >> /etc/environment
 
-# update repositories
-apt-get update
-
-# install vim
-apt-get install vim -y
-
 # get vagrant key
 mkdir -p /home/vagrant/.ssh
 wget --no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
 chmod 0700 /home/vagrant/.ssh
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant /home/vagrant/.ssh
+
+# update repositories
+apt-get update
 
 # install ssh server
 apt-get install openssh-server -y
@@ -69,7 +66,7 @@ apt-get purge usbutils lxc lxcfs lxd-client open-vm-tools python2.7 python2.7-do
 apt-get autoremove -y -f
 
 # ensure some utils
-apt-get install rsync iptables lsb-release
+apt-get install rsync iptables lsb-release vim -y -f
 
 # update bootloader (grub)
 sed -i /etc/default/grub \
