@@ -40,7 +40,7 @@ sed /etc/ssh/sshd_config -i \
     -e 's/PermitEmptyPasswords yes/PermitEmptyPasswords no/g' \
     -e 's/\#PermitEmptyPasswords/PermitEmptyPasswords/g' 
 
-echo "UseDNS no" >> /etc/sshd_config
+echo "UseDNS no" >> /etc/ssh/sshd_config
 
 # restart ssh
 service ssh restart
