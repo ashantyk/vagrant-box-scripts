@@ -16,6 +16,9 @@ if (($EUID != 0)); then
   exit
 fi
 
+# update / fix locale
+echo 'LC_ALL="en_US.utf8"' >> /etc/environment
+
 # update repositories
 apt-get update
 
@@ -59,12 +62,14 @@ mount -o loop,ro VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 umount /mnt
 rm VBoxGuestAdditions_$VBOX_VERSION.iso 
 apt-get purge git git-man -y -f
-apt-get purge build-essential linux-headers* software-properties-common libx11* gcc cpp gcc-5 cpp-5 -y -f
 apt-get purge wireless* memtest86+ laptop-detect -y -f
+apt-get purge build-essential linux-headers* software-properties-common make -y -f
+apt-get purge libx11* gcc cpp gcc-5 cpp-5 -y -f
+apt-get purge usbutils lxc lxcfs lxd-client open-vm-tools python2.7 python2.7-doc -y -f
 apt-get autoremove -y -f
 
-# ensure rsync
-apt-get install rsync
+# ensure some utils
+apt-get install rsync iptables lsb-release
 
 # update bootloader (grub)
 sed -i /etc/default/grub \
