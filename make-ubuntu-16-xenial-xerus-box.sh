@@ -76,6 +76,12 @@ update-grub
 
 # update network interfaces
 sed /etc/network/interfaces -i -e 's/\enp0s3/eth0/g'
+echo "auto eth1" >> /etc/network/interfaces
+echo "iface eth1 inet manual" >> /etc/network/interfaces
+echo "auto eth2" >> /etc/network/interfaces
+echo "iface eth2 inet manual" >> /etc/network/interfaces
+echo "auto eth3" >> /etc/network/interfaces
+echo "iface eth3 inet manual" >> /etc/network/interfaces
 
 # whiteout
 dd if=/dev/zero of=/EMPTY bs=1M
