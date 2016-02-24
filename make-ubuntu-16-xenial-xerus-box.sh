@@ -58,12 +58,6 @@ mount -o loop,ro VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 # cleanup
 umount /mnt
 rm VBoxGuestAdditions_$VBOX_VERSION.iso 
-apt-get purge git git-man -y -f
-apt-get purge wireless* memtest86+ laptop-detect -y -f
-apt-get purge build-essential linux-headers* software-properties-common make -y -f
-apt-get purge libx11* gcc cpp gcc-5 cpp-5 -y -f
-apt-get purge usbutils lxc lxcfs lxd-client open-vm-tools python2.7 python2.7-doc -y -f
-apt-get autoremove -y -f
 
 # ensure some utils
 apt-get install rsync iptables lsb-release vim -y -f
@@ -82,12 +76,3 @@ echo "auto eth2" >> /etc/network/interfaces
 echo "iface eth2 inet manual" >> /etc/network/interfaces
 echo "auto eth3" >> /etc/network/interfaces
 echo "iface eth3 inet manual" >> /etc/network/interfaces
-
-# whiteout
-dd if=/dev/zero of=/EMPTY bs=1M
-rm -f /EMPTY
-
-# clear history
-cat /dev/null > /home/vagrant/.bash_history
-cat /dev/null > /root/.bash_history
-history -c
