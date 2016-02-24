@@ -26,6 +26,11 @@ chmod 0700 /home/vagrant/.ssh
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant /home/vagrant/.ssh
 
+# add some faster repositories
+echo 'deb http://eu-central-1.clouds.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse' >> /etc/apt/sources.list
+echo 'deb http://eu-central-1.clouds.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse' >> /etc/apt/sources.list
+echo 'deb http://eu-central-1.clouds.archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse' >> /etc/apt/sources.list
+
 # update repositories
 apt-get update
 
