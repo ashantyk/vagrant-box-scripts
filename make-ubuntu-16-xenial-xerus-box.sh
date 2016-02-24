@@ -26,11 +26,6 @@ chmod 0700 /home/vagrant/.ssh
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant /home/vagrant/.ssh
 
-# add some faster repositories
-echo 'deb http://eu-central-1.clouds.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse' >> /etc/apt/sources.list
-echo 'deb http://eu-central-1.clouds.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse' >> /etc/apt/sources.list
-echo 'deb http://eu-central-1.clouds.archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse' >> /etc/apt/sources.list
-
 # update repositories
 apt-get update
 
@@ -59,13 +54,11 @@ VBOX_VERSION=5.0.14
 wget http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso
 mount -o loop,ro VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 /mnt/VBoxLinuxAdditions.run --nox11
-
-# cleanup
 umount /mnt
-rm VBoxGuestAdditions_$VBOX_VERSION.iso 
+rm VBoxGuestAdditions_$VBOX_VERSION.iso
 
 # ensure some utils
-apt-get install rsync iptables lsb-release vim -y -f
+apt-get install rsync iptables lsb-release vim -y
 
 # update bootloader (grub)
 sed -i /etc/default/grub \
