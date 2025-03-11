@@ -25,7 +25,7 @@ wget --no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys
 apt-get update
 
 # install build essentials
-apt install build-essential -y
+apt install build-essential ifupdown -y
 
 # install/build vbox guest additions
 cd /tmp
@@ -41,7 +41,23 @@ sed -i /etc/default/grub \
   -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\"/GRUB_CMDLINE_LINUX_DEFAULT=\"net.ifnames=0 quiet\"/g"
 update-grub
 
+# disable netplan
+systemctl stop systemd-networkd
+systemctl disable systemd-networkd
+rm -rf /etc/netplan
+
+# configure interfaces
+echo "# Loopback interface
+auto lo
+iface lo inet loopback
+
+# NAT interface (default for Vagrant)
+auto eth0
+iface eth0 inet dhcp
+" > /etc/network/interfaces
+
 # cleanup
-apt purge build-essential gcc make perl
-apt autoremove
+apt purge build-essential gcc make perl netplan.io -y
+apt autoremove -y
 apt clean
+history -c
