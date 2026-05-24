@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# preverabily run this script on a clean install of ubuntu 24 server (minimized) 
+# preferabily run this script on a clean install of ubuntu 24 server (minimized) 
 # with username, hostname and password set to 'vagrant'
 # and ssh installed with 'allow password login' (when asked during OS install)
 
